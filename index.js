@@ -1,4 +1,3 @@
-
 class Book {
   constructor(title, author) {
     this.title = title;
@@ -19,9 +18,7 @@ class BookCollection {
         { title: "Book 1", author: "Author 1" },
         { title: "Book 2", author: "Author 2" },
       ];
-      this.books = initialBooks.map(
-        (book) => new Book(book.title, book.author)
-      );
+      this.books = initialBooks.map((book) => new Book(book.title, book.author));
       this.saveCollectionToLocalStorage();
     }
 
@@ -77,40 +74,30 @@ class BookCollection {
   };
 }
 
-new BookCollection();
-
 const mostrarFechaHora = () => {
-  const fechaHora = luxon.DateTime.local(); // Verifica que el script de Luxon esté correctamente cargado
+  const fechaHora = luxon.DateTime.local();
 
-  // Obtener el día del mes
   const dia = fechaHora.day;
   const sufijoDia = obtenerSufijoDia(dia);
 
-  // Obtener el mes
   const mes = fechaHora.monthLong;
 
-  // Obtener el año
   const anio = fechaHora.year;
 
-  // Obtener la hora, minutos y segundos
   let hora = fechaHora.hour;
   const minutos = fechaHora.minute;
   const segundos = fechaHora.second;
 
-  // Formatear la hora
   const sufijoHora = hora < 12 ? "am" : "pm";
   hora = hora % 12 === 0 ? 12 : hora % 12;
 
-  // Convertir minutos a cadena y rellenar con ceros a la izquierda
   const minutosCadena = minutos.toString().padStart(2, "0");
 
-  // Construir el mensaje
   const mensaje = `${mes} ${dia}${sufijoDia} ${anio}, ${hora}:${minutosCadena}:${segundos} ${sufijoHora}`;
 
   document.getElementById("fecha-hora").textContent = mensaje;
 };
 
-// Actualizar la fecha y hora cada segundo
 setInterval(mostrarFechaHora, 1000);
 
 const mostrarSeccion = (seccionId) => {
@@ -121,7 +108,6 @@ const mostrarSeccion = (seccionId) => {
   document.getElementById(seccionId).classList.remove("hidden");
 };
 
-// Función para obtener el sufijo del día
 const obtenerSufijoDia = (dia) => {
   if (dia === 1 || dia === 21 || dia === 31) {
     return "st";
@@ -133,3 +119,5 @@ const obtenerSufijoDia = (dia) => {
     return "th";
   }
 };
+
+new BookCollection();
