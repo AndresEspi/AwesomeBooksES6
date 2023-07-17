@@ -35,28 +35,27 @@ class Book {
       this.renderBooks();
     }
   
-    renderBooks() {
+    renderBooks = () => {
       this.listSection.innerHTML = '';
-    
+  
       this.books.forEach((book, index) => {
         const listItem = document.createElement('li');
         const bookInfoSpan = document.createElement('span');
         bookInfoSpan.textContent = `"${book.title}" by ${book.author}`;
         listItem.appendChild(bookInfoSpan);
-    
+  
         const removeButton = document.createElement('button');
         removeButton.textContent = 'Remove';
         removeButton.addEventListener('click', () => {
           this.removeBook(index);
         });
-    
+  
         listItem.appendChild(removeButton);
         this.listSection.appendChild(listItem);
       });
     }
-    
   
-    addBook(title, author) {
+    addBook = (title, author) => {
       if (title && author) {
         const newBook = new Book(title, author);
         this.books.push(newBook);
@@ -65,52 +64,63 @@ class Book {
       }
     }
   
-    removeBook(index) {
+    removeBook = (index) => {
       this.books.splice(index, 1);
       this.renderBooks();
       this.saveCollectionToLocalStorage();
     }
   
-    saveCollectionToLocalStorage() {
+    saveCollectionToLocalStorage = () => {
       localStorage.setItem('booksCollection', JSON.stringify(this.books));
     }
   }
   
   new BookCollection();
   
-  function mostrarFechaHora() {
-    var fechaHora = new Date();
-    
+  const mostrarFechaHora = () => {
+    const fechaHora = luxon.DateTime.local(); // Verifica que el script de Luxon esté correctamente cargado
+  
     // Obtener el día del mes
-    var dia = fechaHora.getDate();
-    var sufijoDia = obtenerSufijoDia(dia);
+    const dia = fechaHora.day;
+    const sufijoDia = obtenerSufijoDia(dia);
   
     // Obtener el mes
-    var mes = fechaHora.toLocaleString('default', { month: 'long' });
+    const mes = fechaHora.monthLong;
   
     // Obtener el año
-    var anio = fechaHora.getFullYear();
+    const anio = fechaHora.year;
   
     // Obtener la hora, minutos y segundos
-    var hora = fechaHora.getHours();
-    var minutos = fechaHora.getMinutes();
-    var segundos = fechaHora.getSeconds();
+    let hora = fechaHora.hour;
+    const minutos = fechaHora.minute;
+    const segundos = fechaHora.second;
   
     // Formatear la hora
-    var sufijoHora = (hora < 12) ? 'am' : 'pm';
+    const sufijoHora = (hora < 12) ? 'am' : 'pm';
     hora = (hora % 12 === 0) ? 12 : hora % 12;
   
     // Convertir minutos a cadena y rellenar con ceros a la izquierda
-    minutos = minutos.toString().padStart(2, '0');
+    const minutosCadena = minutos.toString().padStart(2, '0');
   
     // Construir el mensaje
-    var mensaje = mes + " " + dia + sufijoDia + " " + anio + ", " + hora + ":" + minutos + ":" + segundos + " " + sufijoHora;
+    const mensaje = `${mes} ${dia}${sufijoDia} ${anio}, ${hora}:${minutosCadena}:${segundos} ${sufijoHora}`;
   
     document.getElementById("fecha-hora").textContent = mensaje;
   }
   
+  // Actualizar la fecha y hora cada segundo
+  setInterval(mostrarFechaHora, 1000);
+  
+  const mostrarSeccion = (seccionId) => {
+    const secciones = document.getElementsByClassName('section');
+    for (let i = 0; i < secciones.length; i++) {
+      secciones[i].classList.add('hidden');
+    }
+    document.getElementById(seccionId).classList.remove('hidden');
+  }
+  
   // Función para obtener el sufijo del día
-  function obtenerSufijoDia(dia) {
+  const obtenerSufijoDia = (dia) => {
     if (dia === 1 || dia === 21 || dia === 31) {
       return "st";
     } else if (dia === 2 || dia === 22) {
@@ -122,13 +132,3 @@ class Book {
     }
   }
   
-  // Actualizar la fecha y hora cada segundo
-  setInterval(mostrarFechaHora, 1000);
-  
-  function mostrarSeccion(seccionId) {
-    var secciones = document.getElementsByClassName('section');
-    for (var i = 0; i < secciones.length; i++) {
-      secciones[i].classList.add('hidden');
-    }
-    document.getElementById(seccionId).classList.remove('hidden');
-  }
