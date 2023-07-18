@@ -1,12 +1,6 @@
-class Book {
-  constructor(title, author) {
-    this.title = title;
-    this.author = author;
-  }
-}
-
-class BookCollection {
-  constructor() {
+/* eslint-disable */
+class bookCollection {
+   constructor() {
     this.books = JSON.parse(localStorage.getItem("booksCollection")) || [];
     this.form = document.querySelector("form");
     this.titleInput = document.querySelector('input[placeholder="Title"]');
@@ -18,7 +12,9 @@ class BookCollection {
         { title: "Book 1", author: "Author 1" },
         { title: "Book 2", author: "Author 2" },
       ];
-      this.books = initialBooks.map((book) => new Book(book.title, book.author));
+      this.books = initialBooks.map(
+        (book) => new Book(book.title, book.author)
+      );
       this.saveCollectionToLocalStorage();
     }
 
@@ -74,50 +70,4 @@ class BookCollection {
   };
 }
 
-const mostrarFechaHora = () => {
-  const fechaHora = luxon.DateTime.local();
-
-  const dia = fechaHora.day;
-  const sufijoDia = obtenerSufijoDia(dia);
-
-  const mes = fechaHora.monthLong;
-
-  const anio = fechaHora.year;
-
-  let hora = fechaHora.hour;
-  const minutos = fechaHora.minute;
-  const segundos = fechaHora.second;
-
-  const sufijoHora = hora < 12 ? "am" : "pm";
-  hora = hora % 12 === 0 ? 12 : hora % 12;
-
-  const minutosCadena = minutos.toString().padStart(2, "0");
-
-  const mensaje = `${mes} ${dia}${sufijoDia} ${anio}, ${hora}:${minutosCadena}:${segundos} ${sufijoHora}`;
-
-  document.getElementById("fecha-hora").textContent = mensaje;
-};
-
-setInterval(mostrarFechaHora, 1000);
-
-const mostrarSeccion = (seccionId) => {
-  const secciones = document.getElementsByClassName("section");
-  for (let i = 0; i < secciones.length; i++) {
-    secciones[i].classList.add("hidden");
-  }
-  document.getElementById(seccionId).classList.remove("hidden");
-};
-
-const obtenerSufijoDia = (dia) => {
-  if (dia === 1 || dia === 21 || dia === 31) {
-    return "st";
-  } else if (dia === 2 || dia === 22) {
-    return "nd";
-  } else if (dia === 3 || dia === 23) {
-    return "rd";
-  } else {
-    return "th";
-  }
-};
-
-new BookCollection();
+new bookCollection();
