@@ -1,49 +1,131 @@
-.toolbar1 {
+html,
+body,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Comic Neue', cursive;
+  line-height: 1.5;
+}
+
+header {
+  padding: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  align-items: center;
+  color: black;
+  margin: 0 -5px;
+  padding: 0 10px;
+  border-right: 3px solid black;
+  text-decoration: none;
+}
+
+nav ul li :active {
+  color: blue;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+
+section {
+  display: none;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  font-family: 'Comic Neue', cursive;
+  border: 3px solid black;
+  font-weight: 600;
+  padding: 0 20px;
+  height: 35px;
+}
+
+small {
+  display: flex;
+  font-weight: 600;
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+.top-nav {
   height: 35px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border: 3px solid black;
-  font-family: "Comic Neue", cursive;
+  font-family: 'Comic Neue', cursive;
   font-weight: 600;
   padding-left: 15px;
   border-bottom: 5px solid black;
   border-right: 5px solid black;
 }
 
-.options {
+.date-container {
   display: flex;
-  margin-right: -2px;
+  width: 100%;
+  justify-content: flex-end;
 }
 
-.options li {
+.book-title {
+  width: 100%;
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#books-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.book-stack:nth-child(even) {
+  font-family: 'Comic Neue', cursive;
+  border: 3px solid black;
+  margin: 15px;
+}
+
+.book {
   display: flex;
   align-items: center;
-  margin: 10px 0;
+  justify-content: space-between;
+  padding: 0 5px;
+  font-size: 10px;
+}
+
+.book p {
+  font-size: 16px;
   padding: 0 10px;
-  border-right: 3px solid black;
-  text-decoration: none;
 }
 
-.options a {
-  text-decoration: none;
-  color: black;
-}
-
-.options a:active {
-  color: blue;
-}
-
-#fecha-hora {
-  display: flex;
-  flex-direction: row-reverse;
-  font-family: "Comic Neue", cursive;
-  font-weight: 600;
-}
-
-button {
+.book button.remove-button {
   background-color: aliceblue;
-  font-family: "Comic Neue", cursive;
+  font-family: 'Comic Neue', cursive;
   font-weight: 600;
   width: max-content;
   padding: 0 10px;
@@ -54,103 +136,35 @@ button {
   border-radius: 2px;
 }
 
-.container hr {
-  width: 10%;
-  border: none;
-  height: 2px;
-  background-color: black;
-}
-
-.cont {
-  margin: 33vh 0;
-}
-
-.cont h1 {
-  font-family: "Comic Neue", cursive;
-  text-align: center;
-  font-size: 25px;
-}
-
-.list-section {
-  font-family: "Comic Neue", cursive;
-  border: 3px solid black;
-}
-
-.list-section li {
-  display: flex;
-  justify-content: space-between;
-  padding: 5px;
-  font-size: 14px;
-  margin-left: -40px;
-  font-weight: 600;
-}
-
-.form {
-  font-family: "Comic Neue", cursive;
-  display: flex;
-  justify-content: space-around;
-  margin: 32vh 0;
-}
-
-.form1 {
-  width: 30%;
+.add-book-form {
   display: flex;
   flex-direction: column;
-  padding: 5px;
-  font-size: 14px;
-  margin: 11px;
+  align-items: center;
+  margin-top: 2rem;
+  width: 100%;
 }
 
-.form1 span {
-  font-size: 25px;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-.form1 label {
-  margin: 5px 0;
-}
-
-.form1 input {
+input:not([type="range"]):not([type="color"]) {
   width: 98%;
   border-right: 2px solid black;
   border-bottom: 2px solid black;
   border-top: 4px solid black;
   border-left: 4px solid black;
+  margin: 3px 0;
   border-radius: 2px;
-  font-family: "Comic Neue", cursive;
+  font-family: 'Comic Neue', cursive;
   font-weight: 600;
 }
 
-.button1 {
-  display: flex;
-  justify-content: end;
-}
-
-.contact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: "Comic Neue", cursive;
+.button {
+  background-color: aliceblue;
+  font-family: 'Comic Neue', cursive;
   font-weight: 600;
-  margin: 30vh 0;
-}
-
-.contact h2 {
-  font-size: 29px;
-}
-
-.hidden {
-  display: none;
-}
-
-footer {
-  display: flex;
-  align-items: center;
-  font-family: "Comic Neue", cursive;
-  border: 3px solid black;
-  font-weight: 600;
-  padding: 0 20px;
-  height: 35px;
+  width: max-content;
+  padding: 0 10px;
+  border-right: 5px solid black;
+  border-bottom: 5px solid black;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-radius: 2px;
 }
